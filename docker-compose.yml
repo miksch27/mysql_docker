@@ -7,15 +7,14 @@ services:
     command: --default-authentication-plugin=mysql_native_password
       --character-set-server=utf8mb4
       --collation-server=utf8mb4_unicode_ci
-    restart: unless-stopped
+    restart: unless-stoppeds
     environment:
-      - MYSQL_ROOT_PASSWORD=ad123456
-      - MYSQL_PASSWORD=ad123456
-      - MYSQL_USER=admin
+      - MYSQL_ROOT_PASSWORD=giveYOwn
+      - MYSQL_PASSWORD=ad123456  # MongoDB env, too.
+      - MYSQL_USER=adminer
       - MYSQL_DATABASE=schule
     volumes:
       - ./MysqlDaten:/var/lib/mysql
-      - ./admin.env:/admin/.env
     ports:
       - "3306:3306"
       - "33060:3360"
@@ -32,13 +31,14 @@ services:
       ADMINER_PLUGINS: tables-filter
     ports:
       - "8080:8080"
-    volumes:
-      - ./admin.env:/admin/.env
+    # volumes:
+    #   - ./adminer.env:/home/adminer/.env
+    #   - ./adminer.env:/.env
   dbMongo:
     image: mongo:latest
     restart: always
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_USERNAME=adminer
       - MONGO_INITDB_ROOT_PASSWORD=ad123456
     ports:
       - 27017:27017
