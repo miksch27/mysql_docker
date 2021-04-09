@@ -1,0 +1,50 @@
+# Use root/example as user/password credentials
+version: "3.8"
+
+services:
+  db:
+    image: mysql:latest
+    command: --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
+      --collation-server=utf8mb4_unicode_ci
+    restart: unless-stopped
+    environment:
+      - MYSQL_ROOT_PASSWORD=ad123456
+      - MYSQL_PASSWORD=ad123456
+      - MYSQL_USER=admin
+      - MYSQL_DATABASE=schule
+    volumes:
+      - ./MysqlDaten:/var/lib/mysql
+      - ./admin.env:/admin/.env
+    ports:
+      - "3306:3306"
+      - "33060:3360"
+  adminer:
+    depends_on:
+      - db
+    image: adminer
+    restart: always
+    environment:
+      ADMINER_DEFAULT_DB_DRIVER: mysql
+      ADMINER_DEFAULT_DB_HOST: mysql
+      ADMINER_DEFAULT_DB_NAME: schule
+      ADMINER_DESIGN: mancave
+      ADMINER_PLUGINS: tables-filter
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./admin.env:/admin/.env
+  dbMongo:
+    image: mongo:latest
+    restart: always
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=ad123456
+    ports:
+      - 27017:27017
+    volumes:
+      - ./mongodb_data_container:/data/db
+  # sqlite3:
+  #  build: .
+  #  volumes:
+  #    - ./sqlite3/:/root/db/
