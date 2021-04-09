@@ -7,7 +7,7 @@ Dies ist ein docker-compose.yml File, um eine MySQL, Adminer unter Docker Deskto
 
 Es bedingt, dass Docker Desktop installiert und gestartet wurde.  Docker Desktop bietet eine Benutzeroberfläche wo Images und Container verwaltet werden können.
 
-Alle Innhalte sind hier: Work in Progress. Kritik Wellcom. Danke!
+Alle Innhalte sind hier: Work in Progress. Guten Input gerne. Danke!
 
 Befehl für das Starten des Netzwerk, MySQL und Adminer:
 
