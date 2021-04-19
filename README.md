@@ -1,5 +1,4 @@
-# mysql_docker
-## MySQL and mongo deployment sample
+## MySQL Docker deployment sample
  
 Hallo
 
