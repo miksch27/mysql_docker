@@ -2,7 +2,7 @@
  
 Hallo
 
-Dies ist ein docker-compose.yml File, um eine MySQL, Adminer unter Docker Desktop verwalten zu können. (verwalten bedeutet start, stop)
+Dies ist ein docker-compose.yml File um MySQL, den Adminer unter Docker Desktop einrichten zu können. 
 
 Es bedingt, dass Docker Desktop installiert und gestartet wurde.  Docker Desktop bietet eine Benutzeroberfläche wo Images und Container verwaltet werden können.
 Es muß Verzeichnis MysqlDaten da sein:
