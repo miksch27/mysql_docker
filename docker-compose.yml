@@ -4,25 +4,26 @@ version: "3.8"
 services:
   db:
     image: mysql:latest
-    command: --default-authentication-plugin=mysql_native_password
-      --character-set-server=utf8mb4
+    command: --character-set-server=utf8mb4
       --collation-server=utf8mb4_unicode_ci
-   # restart: unless-stoppeds
     environment:
-      - MYSQL_ROOT_PASSWORD=giveYOwn
-      - MYSQL_PASSWORD=ad123456  # MongoDB env, too.
+      - MYSQL_RANDOM_ROOT_PASSWORD=YES
+      - MYSQL_ONETIME_PASSWORD=YES
+      - MYSQL_DATABASE=Sensor
       - MYSQL_USER=adminer
-      - MYSQL_DATABASE=schule
+      - MYSQL_PASSWORD=ad123456
     volumes:
-      - ./MysqlDaten:/var/lib/mysql
+      - ./MySQLDaten:/var/lib/mysql
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
       - "33060:3360"
+    networks:
+      - front-tier
   adminer:
     depends_on:
       - db
     image: adminer
-   # restart: always
     environment:
       ADMINER_DEFAULT_DB_DRIVER: mysql
       ADMINER_DEFAULT_DB_HOST: mysql
@@ -31,20 +32,8 @@ services:
       ADMINER_PLUGINS: tables-filter
     ports:
       - "8080:8080"
-    # volumes:
-    #   - ./adminer.env:/home/adminer/.env
-    #   - ./adminer.env:/.env
- # dbMongo:
- #   image: mongo:latest
- #   restart: always
- #   environment:
- #     - MONGO_INITDB_ROOT_USERNAME=adminer
- #     - MONGO_INITDB_ROOT_PASSWORD=ad123456
- #   ports:
- #     - 27017:27017
- #   volumes:
- #     - ./mongodb_data_container:/data/db
-  # sqlite3:
-  #  build: .
-  #  volumes:
-  #    - ./sqlite3/:/root/db/
+    networks:
+      - front-tier
+networks:
+  # The presence of these objects is sufficient to define them
+  front-tier: {}

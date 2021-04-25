@@ -1,0 +1,14 @@
+
+  # dbMongo:
+  #   image: mongo:latest
+  #   environment:
+  #     - MONGO_INITDB_ROOT_USERNAME=adminer
+  #     - MONGO_INITDB_ROOT_PASSWORD=ad123456
+  #   ports:
+  #     - 27017:27017
+  #   volumes:
+  #     - ./mongodb_data_container:/data/db
+  # sqlite3:
+  #  build: .
+  #  volumes:
+  #    - ./sqlite3/:/root/db/
