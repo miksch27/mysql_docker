@@ -4,7 +4,8 @@ version: "3.8"
 services:
   db:
     image: mysql:latest
-    command: --character-set-server=utf8mb4
+    command: --default-authentication-plugin=mysql_native_password
+      --character-set-server=utf8mb4
       --collation-server=utf8mb4_unicode_ci
     environment:
       - MYSQL_RANDOM_ROOT_PASSWORD=YES
@@ -27,7 +28,7 @@ services:
     environment:
       ADMINER_DEFAULT_DB_DRIVER: mysql
       ADMINER_DEFAULT_DB_HOST: mysql
-      ADMINER_DEFAULT_DB_NAME: schule
+      ADMINER_DEFAULT_DB_NAME: Sensor
       ADMINER_DESIGN: mancave
       ADMINER_PLUGINS: tables-filter
     ports:
